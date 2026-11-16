@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101a20" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Moscow Haul | Night Run</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="game" aria-label="3D truck driving game"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">М</div><div><div class="brand-name">MOSCOW <span>HAUL</span></div><div class="brand-sub">NIGHT SHIFT · EST. 1991</div></div></div>
+      <div class="weather"><span class="weather-dot"></span><span>12°</span><span class="weather-divider"></span><span>МОСКВА</span><span class="weather-divider"></span><span id="clock">21:40</span></div>
+      <button class="icon-button" id="sound-button" aria-label="Toggle sound">♫ <span>SOUND</span></button>
+    </header>
+    <section class="mission-card" id="mission-card">
+      <div class="eyebrow"><span class="live-dot"></span> ACTIVE DELIVERY <span class="mission-id">#047</span></div>
+      <div class="mission-title" id="mission-title">Red Square run</div>
+      <div class="mission-route"><span class="route-pin">⌖</span><span id="mission-copy">Follow the green beacons to the drop point.</span></div>
+      <div class="mission-progress"><div class="progress-track"><i id="progress-fill"></i></div><span id="progress-label">0 / 4</span></div>
+      <div class="mission-reward"><span>DELIVERY BONUS</span><b>₽ 12,500</b></div>
+    </section>
+    <div class="objective-pill" id="objective-pill"><span class="objective-pulse"></span><span id="objective-text">NEXT BEACON</span><b id="distance">— m</b></div>
+    <section class="speed-card">
+      <div class="speed-main"><span class="speed-number" id="speed">00</span><span class="speed-unit">KM/H</span></div>
+      <div class="speed-divider"></div>
+      <div class="gear"><span>GEAR</span><b id="gear">N</b></div>
+      <div class="speed-footer"><span class="engine-dot"></span><span id="engine-status">ENGINE IDLE</span><span class="speed-hint">ABS · ON</span></div>
+    </section>
+    <div class="map-card"><div class="map-head"><span>ROUTE MAP</span><span class="map-live">LIVE</span></div><canvas id="minimap" width="180" height="180"></canvas><div class="map-bottom"><span>САДОВОЕ КОЛЬЦО</span><span>N ↑</span></div></div>
+    <div class="toast" id="toast" aria-live="polite"></div>
+    <div class="start-screen" id="start-screen">
+      <div class="start-kicker">MOSCOW · 21:40 · LIGHT RAIN</div>
+      <h1>The city<br>is <em>yours.</em></h1>
+      <p>One last haul through the sleeping capital.<br>Follow the beacons. Bring it home.</p>
+      <button id="start-button" class="start-button">START YOUR ENGINE <span>↗</span></button>
+      <div class="start-controls"><span>WASD / ARROWS <i>DRIVE</i></span><span>SPACE <i>BRAKE</i></span></div>
+    </div>
+    <div class="delivery-modal hidden" id="delivery-modal"><div class="modal-card"><div class="modal-icon">✦</div><div class="eyebrow">DELIVERY COMPLETE</div><h2>Nice driving,<br><em>comrade.</em></h2><p>Your cargo made it across Moscow in one piece.</p><div class="earned">₽ 12,500 <small>ADDED TO WALLET</small></div><button id="again-button" class="start-button">DRIVE AGAIN <span>↗</span></button></div></div>
+    <div class="touch-controls" aria-label="Touch driving controls">
+      <div class="steer-controls"><button data-control="left">◀</button><button data-control="right">▶</button></div>
+      <div class="pedal-controls"><button data-control="brake" class="brake">BRAKE</button><button data-control="throttle" class="throttle">GO <b>▲</b></button></div>
+    </div>
+    <div class="bottom-hint"><span>WASD</span> TO DRIVE <i>·</i> <span>SPACE</span> TO BRAKE <i>·</i> <span>R</span> TO RESET</div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
