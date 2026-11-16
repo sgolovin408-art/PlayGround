@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111412" />
+  <link rel="icon" href="data:," />
+  <title>КАМЕНЬ — шахта тишины</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="На главную"><span class="brand-mark">◈</span><span>ТИХАЯ ШАХТА</span></a>
+      <div class="top-center"><span class="live-dot"></span> СМЕНА <b id="shift-number">01</b><span class="top-divider"></span><span class="weather">⌁</span> ГЛУБИНА <b id="depth-label">12 м</b></div>
+      <button class="icon-button" id="sound-toggle" aria-label="Звук включён" title="Звук">♫</button>
+    </header>
+
+    <section class="dashboard">
+      <aside class="left-panel">
+        <div class="eyebrow">ТВОЯ СМЕНА <span class="line"></span></div>
+        <h1>Найди<br><em>свой камень.</em></h1>
+        <p class="intro">Каждый удар — маленькое открытие. Что скрывает порода?</p>
+        <div class="stats-card">
+          <div class="stat-row"><span class="stat-icon stone-icon">◆</span><span>Осколки</span><strong id="stone-count">0</strong></div>
+          <div class="stat-row"><span class="stat-icon sparkle">✳</span><span>Найдено пород</span><strong id="rocks-found">0 <small>/ 8</small></strong></div>
+          <div class="stat-row"><span class="stat-icon depth-icon">↘</span><span>Глубина</span><strong id="depth-stat">12 <small>м</small></strong></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-label"><span>ДО СЛЕДУЮЩЕЙ ПОРОДЫ</span><span id="progress-text">0 / 4</span></div>
+          <div class="progress-track"><i id="discovery-progress"></i></div>
+          <p id="next-hint">Собери 4 осколка — слой откроется.</p>
+        </div>
+        <div class="note-card"><span class="note-mark">✎</span><div><b>ЗАПИСЬ ГЕОЛОГА</b><p id="journal-note">«Тишина здесь звучит по-особенному.»</p></div></div>
+      </aside>
+
+      <section class="mine-panel" aria-label="Игровое поле">
+        <div class="scene-top"><div><span class="scene-label">ОБРАЗЕЦ № <b id="specimen-number">001</b></span><span class="rarity" id="rarity-label">ОБЫЧНЫЙ</span></div><div class="depth-chip"><span>⌁</span> ГОРИЗОНТ <b id="horizon-label">I</b></div></div>
+        <div class="rock-stage" id="rock-stage">
+          <div class="ambient-glow"></div><div class="stage-grid"></div>
+          <div class="rock-shadow"></div>
+          <canvas id="rock-canvas" width="440" height="380" role="img" aria-label="Камень, нажмите чтобы ударить"></canvas>
+          <div class="hit-flash" id="hit-flash"></div>
+          <div class="crack-overlay" id="crack-overlay"></div>
+          <div class="float-layer" id="float-layer"></div>
+          <div class="stage-caption"><span class="caption-dot"></span><span id="rock-name">Серый сланец</span><span class="caption-sep">/</span><span id="rock-type">осадочная порода</span></div>
+          <div class="tap-hint" id="tap-hint"><span>✦</span> НАЖМИ, ЧТОБЫ УДАРИТЬ</div>
+        </div>
+        <div class="rock-status">
+          <div class="hp-heading"><span>ПРОЧНОСТЬ ПОРОДЫ</span><span id="hp-label">40 <i>/ 40</i></span></div>
+          <div class="hp-track"><div id="hp-fill"></div><div class="hp-ticks"><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="tool-row"><div class="tool-info"><span class="pickaxe">⛏</span><span>ТВОЙ ИНСТРУМЕНТ <b id="tool-name">Старый кайло</b></span></div><span class="power-badge">СИЛА <b id="power-label">1</b></span></div>
+        </div>
+        <button class="strike-button" id="strike-button"><span class="strike-icon">⛏</span><span>УДАРИТЬ</span><kbd>ПРОБЕЛ</kbd></button>
+        <div class="under-button"><span>или просто нажми на камень</span><span class="combo-display" id="combo-display">СЕРИЯ <b>0</b> ×</span></div>
+      </section>
+
+      <aside class="right-panel">
+        <div class="eyebrow">МАСТЕРСКАЯ <span class="line"></span></div>
+        <h2>Стань<br><em>сильнее.</em></h2>
+        <div class="upgrade-list">
+          <article class="upgrade-card" id="upgrade-pick">
+            <div class="upgrade-art pick-art"><span>⛏</span></div>
+            <div class="upgrade-copy"><div class="upgrade-title">Крепкое кайло <span class="upgrade-level" id="pick-level">ур. 1</span></div><p>Больше силы в каждом ударе</p><div class="upgrade-bottom"><span class="cost"><i>◆</i><b id="pick-cost">8</b></span><button class="buy-button" data-upgrade="pick" aria-label="Улучшить кайло">УЛУЧШИТЬ <span>↗</span></button></div></div>
+          </article>
+          <article class="upgrade-card" id="upgrade-gloves">
+            <div class="upgrade-art glove-art"><span>◉</span></div>
+            <div class="upgrade-copy"><div class="upgrade-title">Рабочие перчатки <span class="upgrade-level" id="glove-level">ур. 0</span></div><p>Шанс найти двойной осколок</p><div class="upgrade-bottom"><span class="cost"><i>◆</i><b id="glove-cost">12</b></span><button class="buy-button" data-upgrade="gloves" aria-label="Улучшить перчатки">УЛУЧШИТЬ <span>↗</span></button></div></div>
+          </article>
+          <article class="upgrade-card" id="upgrade-lamp">
+            <div class="upgrade-art lamp-art"><span>✦</span></div>
+            <div class="upgrade-copy"><div class="upgrade-title">Шахтёрская лампа <span class="upgrade-level" id="lamp-level">ур. 0</span></div><p>Подсветит хрупкие места</p><div class="upgrade-bottom"><span class="cost"><i>◆</i><b id="lamp-cost">20</b></span><button class="buy-button" data-upgrade="lamp" aria-label="Улучшить лампу">УЛУЧШИТЬ <span>↗</span></button></div></div>
+          </article>
+        </div>
+        <div class="tip-card"><span class="tip-icon">✧</span><div><b>СОВЕТ СМЕНЫ</b><p id="tip-text">Не спеши. Иногда камень раскрывается только после трещины.</p></div></div>
+        <button class="reset-button" id="reset-button">↻ &nbsp;Начать новую смену</button>
+      </aside>
+    </section>
+    <footer class="footer"><span>КАМЕНЬ <i>—</i> ИГРА О НЕБОЛЬШИХ ОТКРЫТИЯХ</span><span>ДАННЫЕ СОХРАНЯЮТСЯ АВТОМАТИЧЕСКИ <b>●</b></span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="game.js"></script>
+</body>
+</html>
